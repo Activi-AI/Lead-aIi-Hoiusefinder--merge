@@ -1,0 +1,3 @@
+VONAGE_API_KEY=hier_dein_key
+VONAGE_API_SECRET=hier_dein_secret
+VONAGE_FROM_NUMBER=hier_deine_nummer

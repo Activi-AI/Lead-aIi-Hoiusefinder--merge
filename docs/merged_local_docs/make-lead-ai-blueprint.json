@@ -1,0 +1,190 @@
+{
+  "name": "Lead-AI Housefinder Webhook",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "hook": null,
+        "maxResults": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        },
+        "restore": {
+          "parameters": {
+            "hook": {
+              "label": "Lead-AI Webhook"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hook",
+            "type": "hook:gateway-webhook",
+            "label": "Webhook",
+            "required": true
+          },
+          {
+            "name": "maxResults",
+            "type": "number",
+            "label": "Maximum number of results"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "parameters": {
+        "routes": [
+          {
+            "flow": [
+              {
+                "id": 3,
+                "module": "google-email:ActionSendEmail",
+                "version": 2,
+                "parameters": {},
+                "mapper": {
+                  "to": "{{1.data.email}}",
+                  "cc": "",
+                  "bcc": "",
+                  "from": "",
+                  "subject": "Neuer Lead: {{1.data.name}}",
+                  "content": "<h2>Neuer Lead eingegangen!</h2><p><strong>Name:</strong> {{1.data.name}}</p><p><strong>Email:</strong> {{1.data.email}}</p><p><strong>Telefon:</strong> {{1.data.phone}}</p><p><strong>Nachricht:</strong> {{1.data.message}}</p><p><strong>Quelle:</strong> {{1.data.source}}</p><p><strong>Zeitstempel:</strong> {{1.timestamp}}</p>",
+                  "attachments": []
+                },
+                "metadata": {
+                  "designer": {
+                    "x": 450,
+                    "y": -150
+                  }
+                },
+                "filter": {
+                  "name": "Event = lead_created",
+                  "conditions": [
+                    [
+                      {
+                        "a": "{{1.event}}",
+                        "b": "lead_created",
+                        "o": "text:equal"
+                      }
+                    ]
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "flow": [
+              {
+                "id": 4,
+                "module": "http:ActionSendData",
+                "version": 3,
+                "parameters": {},
+                "mapper": {
+                  "url": "https://hooks.slack.com/services/YOUR_SLACK_WEBHOOK",
+                  "method": "POST",
+                  "headers": [],
+                  "qs": [],
+                  "bodyType": "raw",
+                  "contentType": "application/json",
+                  "body": "{\"text\": \"Anruf beendet: {{1.data.to}} - Dauer: {{1.data.duration}}s - Status: {{1.data.status}}\"}"
+                },
+                "metadata": {
+                  "designer": {
+                    "x": 450,
+                    "y": 0
+                  }
+                },
+                "filter": {
+                  "name": "Event = call_completed",
+                  "conditions": [
+                    [
+                      {
+                        "a": "{{1.event}}",
+                        "b": "call_completed",
+                        "o": "text:equal"
+                      }
+                    ]
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "flow": [
+              {
+                "id": 5,
+                "module": "http:ActionSendData",
+                "version": 3,
+                "parameters": {},
+                "mapper": {
+                  "url": "https://api.hubspot.com/crm/v3/objects/contacts",
+                  "method": "POST",
+                  "headers": [
+                    {
+                      "name": "Authorization",
+                      "value": "Bearer YOUR_HUBSPOT_API_KEY"
+                    }
+                  ],
+                  "qs": [],
+                  "bodyType": "raw",
+                  "contentType": "application/json",
+                  "body": "{\"properties\": {\"email\": \"{{1.data.email}}\", \"firstname\": \"{{1.data.name}}\", \"phone\": \"{{1.data.phone}}\", \"lead_source\": \"{{1.data.source}}\"}}"
+                },
+                "metadata": {
+                  "designer": {
+                    "x": 450,
+                    "y": 150
+                  }
+                },
+                "filter": {
+                  "name": "Event = lead_qualified",
+                  "conditions": [
+                    [
+                      {
+                        "a": "{{1.event}}",
+                        "b": "lead_qualified",
+                        "o": "text:equal"
+                      }
+                    ]
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "metadata": {
+        "designer": {
+          "x": 225,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    }
+  }
+}

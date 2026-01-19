@@ -1,0 +1,24 @@
+{
+  "name": "lead-ai-mcp",
+  "version": "1.0.0",
+  "description": "Lead-AI MCP Server for Housefinder with Scraper and Call Tools",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "tsx src/server.ts",
+    "dev": "tsx --watch src/server.ts",
+    "build": "tsc",
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": ["mcp", "ai", "scraper", "lead-ai"],
+  "author": "Activi AI",
+  "license": "MIT"
+}

@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  title: Lead-AI Housefinder API
+  version: 1.0.0
+  description: API for Lead-AI Housefinder system, integrating MCP servers and AI tools.
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+paths:
+  /api/scrape:
+    post:
+      summary: Scrape housing data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: URL to scrape
+      responses:
+        '200':
+          description: Successful scrape
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+  /api/call:
+    post:
+      summary: Initiate AI call for leads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                leadId:
+                  type: string
+      responses:
+        '200':
+          description: Call initiated
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string

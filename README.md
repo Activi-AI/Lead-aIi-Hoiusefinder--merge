@@ -23,3 +23,22 @@ Dieses Repository ist ein Merge aus Housefinder, lead-builder-mcp, lead-ai-mcp u
 
 ## Erweiterungen
 Dieses System erweitert sich kontinuierlich. Neue Module können hinzugefügt werden, ohne bestehende zu ändern.
+
+## Erweiterte MCP-Server aus LEAD-AI-COMPLETE
+Zusätzlich integriert wurden vollständige MCP-Server-Implementierungen aus der lokalen Extraktion:
+- **agents/brain-mcp-server/**: Brain-basierter MCP-Server.
+- **agents/lead-ai-mcp/**: Lead-AI MCP-Server mit Scraper und Call-Tools.
+- **agents/mcp-advanced/**: Erweiterte MCP-Funktionen.
+- **agents/mega-merge-mcp/**: Mega-Merge MCP-Server.
+- **agents/call-agents-platform/**: Plattform für Call-Agenten.
+- **ops/server-configs/**: Server-Konfigurationen.
+- **eval/tests/**: Tests für die Implementierungen.
+- **integrations/credentials-examples/**: Beispiele für Credentials.
+- **ops/development/**: Entwicklungs-Setups.
+- **docs/merged_local_docs/**: Zusätzliche Dokumentation.
+
+## 📊 Extraktions-Statistiken (aus LEAD-AI-COMPLETE)
+| Metrik | Wert |
+|--------|------|
+| Tokens analysiert | 2,556,317 |
+| Teile verarbeitet | 50 |
