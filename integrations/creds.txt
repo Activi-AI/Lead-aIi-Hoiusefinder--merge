@@ -1,3 +1,0 @@
-KEY=xxx
-SECRET=xxx
-NUMBER=xxx

@@ -1,0 +1,8 @@
+# Vonage Credentials
+# Kopiere diese Datei nach: vonage-creds.txt
+# Dann fülle die Werte aus
+# Dashboard: https://dashboard.nexmo.com/
+
+VONAGE_API_KEY=dein_vonage_api_key
+VONAGE_API_SECRET=dein_vonage_api_secret
+VONAGE_FROM_NUMBER=deine_vonage_nummer

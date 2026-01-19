@@ -1,0 +1,7 @@
+# Sipgate Credentials
+# Kopiere diese Datei nach: creds.txt
+# Dann fülle die Werte aus
+
+KEY=dein_sipgate_api_key
+SECRET=dein_sipgate_api_secret
+NUMBER=deine_sipgate_nummer

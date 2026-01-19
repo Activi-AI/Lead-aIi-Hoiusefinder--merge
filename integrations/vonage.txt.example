@@ -1,0 +1,7 @@
+# Vonage Config (Alternative Format)
+# Kopiere diese Datei nach: vonage.txt
+# Dann fülle die Werte aus
+
+VONAGE_API_KEY=dein_vonage_api_key
+VONAGE_API_SECRET=dein_vonage_api_secret
+VONAGE_FROM_NUMBER=49123456789

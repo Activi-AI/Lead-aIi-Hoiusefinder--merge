@@ -64,6 +64,14 @@ src/mcp/
 # PM2
 .pm2/
 
+# Credentials (NEVER commit these!)
+integrations/creds.txt
+integrations/vonage-creds.txt
+integrations/vonage.txt
+**/creds.txt
+**/secrets.txt
+**/*-creds.txt
+
 # OS files
 Thumbs.db
 .Spotlight-V100
